@@ -3,13 +3,13 @@
 #include <iostream>
 using namespace std;
 
-class time {
+class timePL {
 private:
 	int hour;
 	int minute;
 public:
-	time();
-	time(int, int);
+	timePL();
+	timePL(int, int);
 	void setHour(int);
 	void setMinute(int);
 	int getHour();
