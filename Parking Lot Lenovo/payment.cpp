@@ -10,8 +10,8 @@ payment::payment() {
 payment::payment(int hour, int min, car** c) {
 	this->c = c;
 	entryTime = NULL;
-	entryTime->setHour(hour);
-	entryTime->setMinute(min);
+	(*entryTime)->setHour(hour);
+	(*entryTime)->setMinute(min);
 	exitTime = NULL;
 	hourPrice = 800;
 	totalPayemnt = 0;
@@ -19,19 +19,19 @@ payment::payment(int hour, int min, car** c) {
 void payment::setCarPayment(car** c) {
 	this->c = c;
 }
-void payment::setEntryTime(time** entryTime) {
+void payment::setEntryTime(timePL** entryTime) {
 	this->entryTime = entryTime;
 }
-void payment::setExitTime(time** exitTime) {
+void payment::setExitTime(timePL** exitTime) {
 	this->exitTime = exitTime;
 }
 void payment::setHourPrice(int hourPrice) {
 	this->hourPrice = hourPrice;
 }
-time** payment::getEntryTime() {
+timePL** payment::getEntryTime() {
 	return entryTime;
 }
-time** payment::getExitTime() {
+timePL** payment::getExitTime() {
 	return exitTime;
 }
 int payment::getHourPrice() {
@@ -41,34 +41,33 @@ double payment::getTotalPayment() {
 	return totalPayemnt;
 }
 double payment::calcTotalPayment(int exitTimeHour, int exitTimeMinute) {
-	if (exitTimeHour > entryTime->getHour()) {
-		if (c->getWeight() < 1.0) {
-			totalPayemnt = (exitTimeHour - entryTime->getHour()) * hourPrice;
+	if (exitTimeHour > (*entryTime)->getHour()) {
+		if ((*c)->getWeight() < 1.0) {
+			totalPayemnt = (exitTimeHour - (*entryTime)->getHour()) * hourPrice;
 			return totalPayemnt;
 		}
-		else if (c->getWeight() >= 1.0 and c->getWeight() <= 1.5) {
-			totalPayemnt = (exitTimeHour - entryTime->getHour()) * hourPrice;
+		else if ((*c)->getWeight() >= 1.0 and (*c)->getWeight() <= 1.5) {
+			totalPayemnt = (exitTimeHour - (*entryTime)->getHour()) * hourPrice;
 			totalPayemnt = totalPayemnt + (totalPayemnt * 0.05);
 			return totalPayemnt;
 		}
-		else if (c->getWeight() >= 1.6 and c->getWeight() <= 3.5) {
-			totalPayemnt = (exitTimeHour - entryTime->getHour()) * hourPrice;
+		else if ((*c)->getWeight() >= 1.6 and (*c)->getWeight() <= 3.5) {
+			totalPayemnt = (exitTimeHour - (*entryTime)->getHour()) * hourPrice;
 			totalPayemnt = totalPayemnt + (totalPayemnt * 0.10);
 			return totalPayemnt;
 		}
-		else if (c->getWeight() >= 3.6 and c->getWeight() <= 5.0) {
-			totalPayemnt = (exitTimeHour - entryTime->getHour()) * hourPrice;
+		else if ((*c)->getWeight() >= 3.6 and (*c)->getWeight() <= 5.0) {
+			totalPayemnt = (exitTimeHour - (*entryTime)->getHour()) * hourPrice;
 			totalPayemnt = totalPayemnt + (totalPayemnt * 0.15);
 			return totalPayemnt;
 		}
 		else {
-			totalPayemnt = (exitTimeHour - entryTime->getHour()) * hourPrice;
+			totalPayemnt = (exitTimeHour - (*entryTime)->getHour()) * hourPrice;
 			totalPayemnt = totalPayemnt + (totalPayemnt * 0.20);
 			return totalPayemnt;
 		}
-
-	}
-	else {
+		
+	} else {
 		//cout << "Unexpected error calculating the price to pay" << endl;
 		return 0;
 	}
