@@ -1,25 +1,25 @@
-#include "time.h"
-time::time() {
+#include "timePL.h"
+timePL::timePL() {
 	hour = 0;
 	minute = 0;
 }
-time::time(int hour, int minute) {
+timePL::timePL(int hour, int minute) {
 	this->hour = hour;
 	this->minute = minute;
 }
-void time::setHour(int hour) {
+void timePL::setHour(int hour) {
 	this->hour = hour;
 }
-void time::setMinute(int minute) {
+void timePL::setMinute(int minute) {
 	this->minute = minute;
 }
-int time::getHour() {
+int timePL::getHour() {
 	return hour;
 }
-int time::getMinute() {
+int timePL::getMinute() {
 	return minute;
 }
-string time::toString() {
+string timePL::toString() {
 	stringstream ss;
 	ss << hour << ":" << minute;
 	return ss.str();
